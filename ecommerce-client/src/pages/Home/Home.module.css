@@ -1,0 +1,24 @@
+.container {
+    box-sizing: border-box;
+    padding-inline: 1rem;
+    display: flex;
+    margin-top: 3rem;
+    gap: 3rem;
+}
+
+.sortAndFilter {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 150px;
+}
+
+@media (max-width: 43.5rem) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sortAndFilter {
+        flex-direction: row;
+    }
+}
