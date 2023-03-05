@@ -1,0 +1,101 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-height: 8rem;
+  padding: 1rem 3rem;
+  gap: 3rem;
+}
+
+.leftContent {
+  display: flex;
+  gap: 2rem;
+}
+
+.imageWrapper {
+  max-height: 8rem;
+  min-width: 6.25rem;
+  box-sizing: border-box;
+}
+
+.image {
+  height: 100%;
+}
+
+.info {
+  box-sizing: border-box;
+}
+
+.title {
+  margin: 0;
+  padding-bottom: 0.3rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.title a {
+  color: inherit;
+}
+
+.title a:hover {
+  text-decoration: underline;
+}
+
+.description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.quantity {
+  outline: none;
+  width: 2.6rem;
+  height: 2rem;
+}
+
+.price::after {
+  content: "x";
+  font-size: 1rem;
+  padding-left: 1rem;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+.removeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 15%;
+  width: 2.3rem;
+  height: 2.3rem;
+}
+
+.removeBtn > svg {
+  fill: red;
+  padding: 15%;
+  box-sizing: border-box;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 47rem) {
+  .description {
+    display: none;
+  }
+  .name {
+    -webkit-line-clamp: 2;
+  }
+}

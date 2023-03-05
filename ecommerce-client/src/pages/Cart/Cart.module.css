@@ -1,0 +1,44 @@
+.cartContainer {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    min-width: 400px;
+    margin: auto;
+    margin-top: 4rem;
+}
+
+.header {
+    background-color: var(--dark-grey);
+    color: #eee;
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.productsContainer {
+    border: 1px solid grey;
+}
+
+.productsContainer > div:not(:last-child) {
+    border-bottom: 1px solid grey;
+}
+
+.priceContainer {
+    background-color: lightgrey;
+    padding: 1.5rem 2rem;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.priceContainer > .resetBtn {
+    text-transform: capitalize;
+    font-size: 1.1rem;
+}
+
+.priceContainer .totalPrice {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
