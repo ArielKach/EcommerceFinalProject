@@ -2,22 +2,20 @@ import styles from './navbar.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaAmazon, FaUser } from 'react-icons/fa';
 import { useContext } from 'react';
-import { TokenContext, UserContext } from '../../context/TokenContext';
-import { useCookies } from 'react-cookie';
+import { UserContext } from '../../context/TokenContext';
 import { successMsg } from '../../utils/toastUtils';
 import { NavbarDropdown } from './NavbarDropdown/NavbarDropdown';
 import { CATEGORIES } from '../../utils/mocks';
 
 const Navbar = () => {
-	const userDetails = useContext(UserContext);
-	const token = useContext(TokenContext);
-	const [cookies, setCookie, removeItem] = useCookies();
 	const navigate = useNavigate();
+	const { user } = useContext(UserContext);
 
 	const handleLogout = () => {
-		removeItem('ecommerceToken');
+		localStorage.removeItem('user');
 		successMsg('You Logged Out Successfully!');
 		navigate('/');
+		navigate(0);
 	};
 
 	return (
@@ -38,7 +36,7 @@ const Navbar = () => {
 				</>
 			</div>
 			<div className={styles.rightIcons}>
-				{!cookies.ecommerceToken ? (
+				{!user ? (
 					<Link to='login' className={styles.icon}>
 						login
 					</Link>
@@ -54,7 +52,7 @@ const Navbar = () => {
 								<>
 									{' '}
 									<FaUser />
-									{userDetails.name}
+									{user.displayName}
 								</>
 							}
 							options={[

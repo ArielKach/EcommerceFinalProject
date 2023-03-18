@@ -1,42 +1,55 @@
-import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { api } from '../globals';
+import firebase from '../firebase';
+
+const parseErorr = (error) => {
+	if (error.code === 'auth/email-already-in-use') {
+		return 'This email is already in use.';
+	}
+	if (error.code === 'auth/weak-password') {
+		return 'Your password must be 6 characters long or more.';
+	}
+	if (error.code === 'auth/invalid-email') {
+		return 'Your email address is badly formatted.';
+	}
+	if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+		return 'Invalid credentials. Please try again.';
+	}
+
+	return 'Unknown error';
+};
 
 export const register = async (email, password, name) => {
 	try {
-		return await axios.post(`${api}/auth/register`, { email, password, name }, { withCredentials: true });
+		const data = await firebase.auth().createUserWithEmailAndPassword(email, password);
+		await firebase.auth().currentUser.updateProfile({
+			displayName: name,
+		});
+		return data.user;
 	} catch (error) {
-		return error?.response?.data;
+		throw new Error(parseErorr(error));
 	}
 };
 
 export const login = async (email, password) => {
 	try {
-		return await axios.post(`${api}/auth/logIn`, { email, password }, { withCredentials: true });
+		const data =  await firebase.auth().signInWithEmailAndPassword(email, password);
+		return data.user;
 	} catch (error) {
-		return error?.response?.data;
+		throw new Error(parseErorr(error));
 	}
 };
 
 export const resetPasswordWithEmail = async (email) => {
 	try {
-		return axios.post(`${api}/auth/resetPassword`, { email }, { withCredentials: true });
+		await firebase.auth().sendPasswordResetEmail(email);
 	} catch (error) {
-		return error?.response?.data;
+		console.log(error)
+		throw new Error(parseErorr(error));
 	}
 };
 
-export const getUser = (token, userId) => {
-	return axios.get(
-		`${api}/profile`,
-		{
-			headers: {
-				Authorization: `${token}`,
-				userid: `${userId}`,
-			},
-		},
-		{ withCredentials: true }
-	);
+export const getUser = () => {
+	return firebase.auth().currentUser;
 };
 
 export const getIsAdmin = () => {
