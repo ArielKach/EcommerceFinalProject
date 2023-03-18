@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { TokenContext, UserContext } from '../../context/TokenContext';
 import { useCookies } from 'react-cookie';
 import { successMsg } from '../../utils/toastUtils';
-import { UserOptions } from './UserOptions/UserOptions';
+import { NavbarDropdown } from './NavbarDropdown/NavbarDropdown';
 import { CATEGORIES } from '../../utils/mocks';
 
 const Navbar = () => {
@@ -28,7 +28,7 @@ const Navbar = () => {
 					Ecommerce
 				</Link>
 				<>
-					<UserOptions
+					<NavbarDropdown
 						mainText={'Categories'}
 						options={CATEGORIES.map((category) => ({
 							text: category,
@@ -48,7 +48,7 @@ const Navbar = () => {
 							<FaShoppingCart />
 							Cart
 						</Link>
-						<UserOptions
+						<NavbarDropdown
 							handleLogout={handleLogout}
 							mainText={
 								<>
