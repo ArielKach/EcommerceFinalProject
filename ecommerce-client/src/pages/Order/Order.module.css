@@ -1,0 +1,62 @@
+.orderPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.productContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.detailsContainer {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.image {
+    height: 50px;
+    width: 50px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+textarea {
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 300px;
+}
+
+.submitButton {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 300px;
+  margin-top: 20px;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}

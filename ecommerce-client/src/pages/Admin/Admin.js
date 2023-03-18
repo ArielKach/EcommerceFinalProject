@@ -2,7 +2,7 @@ import styles from './Admin.module.css'
 import { Chart } from 'react-google-charts';
 
 const Admin = () => {
-    const currnetUsersCount = 10;
+    const currentUsersCount = 10;
     const data = [
         [
             {
@@ -29,8 +29,8 @@ const Admin = () => {
         <div className={styles.container}>
             <div className={styles.infoText}>Store information</div>
             <div className={styles.usersInfo}>
-                <div className={styles.currentUsersText}>Currnet users count: </div>
-                <div className={styles.currentUsersCount}>{currnetUsersCount}</div>
+                <div className={styles.currentUsersText}>Current users count: </div>
+                <div className={styles.currentUsersCount}>{currentUsersCount}</div>
             </div>
 
             <div className={styles.chartContainer}>
