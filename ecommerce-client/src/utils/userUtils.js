@@ -1,4 +1,3 @@
-import jwt_decode from 'jwt-decode';
 import firebase from '../firebase';
 
 const parseErorr = (error) => {
@@ -21,19 +20,32 @@ const parseErorr = (error) => {
 export const register = async (email, password, name) => {
 	try {
 		const data = await firebase.auth().createUserWithEmailAndPassword(email, password);
-		await firebase.auth().currentUser.updateProfile({
-			displayName: name,
-		});
-		return data.user;
+		const db = firebase.firestore();
+		await db
+			.collection('users')
+			.doc(data.user.uid)
+			.set({
+				isAdmin: false,
+				displayName: name,
+				email: data.user.email,
+				uId: data.user.uid,
+			});
+		return { ...data.user, isAdmin: false, displayName: name };
 	} catch (error) {
+		console.log(error);
 		throw new Error(parseErorr(error));
 	}
 };
 
 export const login = async (email, password) => {
 	try {
-		const data =  await firebase.auth().signInWithEmailAndPassword(email, password);
-		return data.user;
+		const data = await firebase.auth().signInWithEmailAndPassword(email, password);
+		const db = firebase.firestore();
+		const doc = await db.collection('users').doc(data.user.uid).get();
+		if (doc.exists) {
+			return doc.data();
+		}
+		throw new Error({ code: 'auth/user-not-found' });
 	} catch (error) {
 		throw new Error(parseErorr(error));
 	}
@@ -43,15 +55,10 @@ export const resetPasswordWithEmail = async (email) => {
 	try {
 		await firebase.auth().sendPasswordResetEmail(email);
 	} catch (error) {
-		console.log(error)
 		throw new Error(parseErorr(error));
 	}
 };
 
 export const getUser = () => {
 	return firebase.auth().currentUser;
-};
-
-export const getIsAdmin = () => {
-	return jwt_decode(sessionStorage.getItem('token')).isAdmin;
 };

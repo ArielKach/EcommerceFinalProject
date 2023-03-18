@@ -8,6 +8,8 @@ import Register from './components/Register/Register';
 import { UserContext } from './context/TokenContext';
 import { ToastContainer } from 'react-toastify';
 import CategoryProducts from './pages/CategoryProducts/CategoryProducts';
+import Admin from "./pages/Admin/Admin";
+
 
 function App() {
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
@@ -25,6 +27,8 @@ function App() {
 					<Route path='/cart' element={<Cart />} />
 					<Route path='/login' element={<Register isRegister={false} updateUser={updateUser} />} />
 					<Route path='/register' element={<Register updateUser={updateUser} />} />
+					<Route path='/admin' element={<Admin/>}></Route>
+
 					<Route path='/' element={<Home />} />
 				</Routes>
 			</UserContext.Provider>

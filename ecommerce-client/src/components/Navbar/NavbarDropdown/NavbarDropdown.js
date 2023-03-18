@@ -6,7 +6,7 @@ export const NavbarDropdown = ({ mainText, options }) => {
 	const [open, setOpen] = useState(null);
 	const handleClose = () => setOpen(null);
 	const handleClick = (e) => setOpen(e.currentTarget);
-
+	console.log(options)
 	return (
 		<>
 			<div

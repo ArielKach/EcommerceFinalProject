@@ -17,7 +17,7 @@ const Navbar = () => {
 		navigate('/');
 		navigate(0);
 	};
-
+	console.log(user)
 	return (
 		<nav className={styles.navbar}>
 			<div className={styles.leftIcons}>
@@ -50,7 +50,6 @@ const Navbar = () => {
 							handleLogout={handleLogout}
 							mainText={
 								<>
-									{' '}
 									<FaUser />
 									{user.displayName}
 								</>
@@ -61,8 +60,12 @@ const Navbar = () => {
 									text: 'Orders',
 								},
 								{
-									onClick: () => navigate('/progile'),
-									text: 'Progile',
+									onClick: () => navigate('/profile'),
+									text: 'Profile',
+								},
+								user.isAdmin && {
+									onClick: () => navigate('/admin'),
+									text: 'Admin',
 								},
 								{
 									onClick: handleLogout,
