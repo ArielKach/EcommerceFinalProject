@@ -11,7 +11,6 @@ import { getIsAdmin } from '../../utils/userUtils';
 
 const Navbar = () => {
 	const userDetails = useContext(UserContext);
-	const token = useContext(TokenContext);
 	const [cookies, setCookie, removeItem] = useCookies();
 	const navigate = useNavigate();
 
@@ -62,13 +61,13 @@ const Navbar = () => {
 									onClick: () => navigate('/order'),
 									text: 'Order',
 								},
+								userDetails.isAdmin && {
+									onClick: () => navigate('/admin'),
+									text: 'Admin',
+								},
 								{
 									onClick: handleLogout,
 									text: 'Logout',
-								},
-								getIsAdmin() && {
-									onClick: () => navigate('/admin'),
-									text: 'Admin',
 								},
 							]}
 						/>
