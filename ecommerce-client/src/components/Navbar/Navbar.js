@@ -2,7 +2,7 @@ import styles from './navbar.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaAmazon, FaUser } from 'react-icons/fa';
 import { useContext } from 'react';
-import { UserContext } from '../../context/TokenContext';
+import { UserContext } from '../../context/UserContext';
 import { successMsg } from '../../utils/toastUtils';
 import { NavbarDropdown } from './NavbarDropdown/NavbarDropdown';
 import { CATEGORIES } from '../../utils/mocks';
