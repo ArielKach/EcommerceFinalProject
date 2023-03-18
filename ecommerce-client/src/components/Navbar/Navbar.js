@@ -17,7 +17,6 @@ const Navbar = () => {
 		navigate('/');
 		navigate(0);
 	};
-	console.log(user)
 	return (
 		<nav className={styles.navbar}>
 			<div className={styles.leftIcons}>

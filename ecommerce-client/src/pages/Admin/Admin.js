@@ -24,7 +24,6 @@ const Admin = () => {
             allDates.delete(chartData.date.getTime())
         })
 
-        console.log(allDates)
         return data.concat(...[...allDates].map(date => { return { date: new Date(date), sum: 0 } }))
     }
     return (

@@ -32,7 +32,6 @@ export const register = async (email, password, name) => {
 			});
 		return { ...data.user, isAdmin: false, displayName: name };
 	} catch (error) {
-		console.log(error);
 		throw new Error(parseErorr(error));
 	}
 };
