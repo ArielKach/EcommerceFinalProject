@@ -53,3 +53,20 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+.info .brand {
+  color: var(--text);
+  display: -webkit-box;
+  font-size: 1.3rem;
+  font-weight: bold;
+  -webkit-box-orient: vertical;
+}
+
+
+.info .category {
+  color: var(--text);
+  display: -webkit-box;
+  font-size: 1.3rem;
+  font-weight: bold;
+  -webkit-box-orient: vertical;
+}
