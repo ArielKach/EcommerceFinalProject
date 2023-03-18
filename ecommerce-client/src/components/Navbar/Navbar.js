@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 import { successMsg } from '../../utils/toastUtils';
 import { NavbarDropdown } from './NavbarDropdown/NavbarDropdown';
 import { CATEGORIES } from '../../utils/mocks';
+import { getIsAdmin } from '../../utils/userUtils';
 
 const Navbar = () => {
 	const userDetails = useContext(UserContext);
@@ -19,7 +20,6 @@ const Navbar = () => {
 		successMsg('You Logged Out Successfully!');
 		navigate('/');
 	};
-
 	return (
 		<nav className={styles.navbar}>
 			<div className={styles.leftIcons}>
@@ -69,6 +69,10 @@ const Navbar = () => {
 								{
 									onClick: handleLogout,
 									text: 'Logout',
+								},
+								getIsAdmin() && {
+									onClick: () => navigate('/admin'),
+									text: 'Admin',
 								},
 							]}
 						/>
