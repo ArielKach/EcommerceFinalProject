@@ -38,7 +38,3 @@ export const getUser = (token, userId) => {
 		{ withCredentials: true }
 	);
 };
-
-export const getIsAdmin = () => {
-	return jwt_decode(sessionStorage.getItem('token')).isAdmin;
-};

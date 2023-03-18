@@ -16,7 +16,7 @@ function App() {
 		<Fragment>
 			<ToastContainer />
 
-			<UserContext.Provider value={{ name: 'default' }}>
+			<UserContext.Provider value={{ name: 'default', isAdmin: true }}>
 				<TokenContext.Provider value={() => {}}>
 					<Navbar />
 					<Routes>
