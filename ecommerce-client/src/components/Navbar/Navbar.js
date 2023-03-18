@@ -63,8 +63,8 @@ const Navbar = () => {
 									text: 'Orders',
 								},
 								{
-									onClick: () => navigate('/progile'),
-									text: 'Progile',
+									onClick: () => navigate('/profile'),
+									text: 'Profile',
 								},
 								{
 									onClick: handleLogout,
