@@ -7,6 +7,8 @@ const ProductCard  = ({
   price,
   imageUrl,
   description,
+  brand,
+  category
 }) => {
   return (
     <div className={styles.container}>
@@ -20,6 +22,8 @@ const ProductCard  = ({
         </h3>
         <div className={styles.price}>{`${price.toLocaleString()}$`}</div>
         <div className={styles.description}>{description}</div>
+        {brand? <div className={styles.brand}>Brand: {brand}</div>: null}
+        {category? <div  className={styles.category}>Category: {category}</div>: null}
       </section>
     </div>
   );

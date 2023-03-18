@@ -7,6 +7,7 @@ import { Fragment } from 'react';
 import Register from './components/Register/Register';
 import { TokenContext, UserContext } from './context/TokenContext';
 import { ToastContainer } from 'react-toastify';
+import CategoryProducts from './pages/CategoryProducts/CategoryProducts';
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 					<Navbar />
 					<Routes>
 						<Route path='/product/:productId' element={<Product />} />
+						<Route path='/category/:categoryName' element={<CategoryProducts />} />
 						<Route path='/cart' element={<Cart />} />
 						<Route path='/login' element={<Register isRegister={false} />} />
 						<Route path='/register' element={<Register />} />

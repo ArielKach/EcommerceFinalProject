@@ -53,7 +53,7 @@ const Product = () => {
             </div>
             <div>
               <h4>brand</h4>
-              {productInfo?.sellerName}
+              {productInfo?.brand}
             </div>
             <div>
               <h4>upload date</h4>

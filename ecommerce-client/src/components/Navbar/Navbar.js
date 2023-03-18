@@ -6,6 +6,7 @@ import { TokenContext, UserContext } from '../../context/TokenContext';
 import { useCookies } from 'react-cookie';
 import { successMsg } from '../../utils/toastUtils';
 import { UserOptions } from './UserOptions/UserOptions';
+import { CATEGORIES } from '../../utils/mocks';
 
 const Navbar = () => {
 	const userDetails = useContext(UserContext);
@@ -21,10 +22,21 @@ const Navbar = () => {
 
 	return (
 		<nav className={styles.navbar}>
-			<Link to='/' className={styles.brand}>
-				<FaAmazon />
-				Ecommerce
-			</Link>
+			<div className={styles.leftIcons}>
+				<Link to='/' className={styles.brand}>
+					<FaAmazon />
+					Ecommerce
+				</Link>
+				<>
+					<UserOptions
+						mainText={'Categories'}
+						options={CATEGORIES.map((category) => ({
+							text: category,
+							onClick: () => navigate(`/category/${category}`),
+						}))}
+					/>
+				</>
+			</div>
 			<div className={styles.rightIcons}>
 				{!cookies.ecommerceToken ? (
 					<Link to='login' className={styles.icon}>
@@ -36,7 +48,30 @@ const Navbar = () => {
 							<FaShoppingCart />
 							Cart
 						</Link>
-						<UserOptions name={userDetails.name} handleLogout={handleLogout} />
+						<UserOptions
+							handleLogout={handleLogout}
+							mainText={
+								<>
+									{' '}
+									<FaUser />
+									{userDetails.name}
+								</>
+							}
+							options={[
+								{
+									onClick: () => navigate('/orders'),
+									text: 'Orders',
+								},
+								{
+									onClick: () => navigate('/progile'),
+									text: 'Progile',
+								},
+								{
+									onClick: handleLogout,
+									text: 'Logout',
+								},
+							]}
+						/>
 					</>
 				)}
 			</div>
