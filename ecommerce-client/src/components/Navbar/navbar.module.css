@@ -1,29 +1,45 @@
 .navbar {
-  padding-inline: 1.5rem;
-  width: 100%;
-  background-color: var(--dark-grey);
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
+	padding-inline: 0.5rem;
+	width: 100%;
+	background-color: var(--dark-grey);
+	height: 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
 }
 
 .brand {
-  color: var(--navbar-text);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.3rem;
+	color: var(--navbar-text);
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 1.3rem;
 }
 
 .brand > svg {
-  fill: orange;
+	fill: orange;
 }
 
-.cart {
-  color: var(--navbar-text);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.rightIcons {
+	display: flex;
+	align-items: flex-end;
+	height: 100%;
+}
+.rightIcons > * {
+	margin-left: 0.5rem;
+	cursor: pointer;
+	height: 100%;
+  padding: 0 10px;
+	color: var(--navbar-text);
+}
+.rightIcons > *:hover {
+	background-color: var(--navbar-hover);
+}
+
+.icon {
+	color: var(--navbar-text);
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 }
