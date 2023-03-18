@@ -8,7 +8,7 @@ import css from './Register.module.css';
 import { login, register, resetPasswordWithEmail } from '../../utils/userUtils';
 import classNames from 'classnames';
 
-function Register({ isRegister = true }) {
+function Register({ isRegister = true, updateUser }) {
 	const [loading, setLoading] = useState(false);
 	const [passResetLoading, setPassResetLoading] = useState(false);
 	const [email, setEmail] = useState('');
@@ -21,17 +21,15 @@ function Register({ isRegister = true }) {
 	const handleForgetPassword = async (e) => {
 		e.preventDefault();
 		setPassResetLoading(true);
-		const res = await resetPasswordWithEmail(email, password);
 
-		if (!res) {
-			Swal.fire(`Oops...`, `Please try again`, 'error');
-		} else if (res.error) {
-			Swal.fire(`Oops...`, `${res.error}`, 'error');
-		} else if (res.status === 200) {
+		try {
+			await resetPasswordWithEmail(email, password);
 			Swal.fire(`Great`, `The password Reset email eas sent to ${email}`, 'success');
+		} catch (e) {
+			Swal.fire(`Oops...`, `${e}`, 'error');
+		} finally {
+			setPassResetLoading(false);
 		}
-
-		setPassResetLoading(false);
 	};
 
 	const handleSubmit = async (e) => {
@@ -43,19 +41,16 @@ function Register({ isRegister = true }) {
 			return setLoading(false);
 		}
 
-		const res = isRegister ? await register(email, password, name) : await login(email, password);
-
-		if (!res) {
-			return setLoading(false);
-		}
-		if (res.fireBaseError) {
-			Swal.fire(`Oops...`, `${res.fireBaseError}`, 'error');
-		} else if (res.status === 200) {
-			setLoading(false);
+		try {
+			const user = isRegister ? await register(email, password, name) : await login(email, password);
+			localStorage.setItem('user', JSON.stringify(user));
+			updateUser(user);
 			navigate('/');
-			navigate(0);
+		} catch (e) {
+			Swal.fire(`Oops...`, `${e.message}`, 'error');
+		} finally {
+			setLoading(false);
 		}
-		setLoading(false);
 	};
 
 	return (

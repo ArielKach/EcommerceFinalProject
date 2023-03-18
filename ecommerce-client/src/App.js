@@ -3,32 +3,36 @@ import Product from './pages/Product/Product';
 import Cart from './pages/Cart/Cart';
 import Home from './pages/Home/Home';
 import Navbar from './components/Navbar/Navbar';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import Register from './components/Register/Register';
-import { TokenContext, UserContext } from './context/TokenContext';
+import { UserContext } from './context/TokenContext';
 import { ToastContainer } from 'react-toastify';
 import CategoryProducts from './pages/CategoryProducts/CategoryProducts';
 import Admin from "./pages/Admin/Admin";
+import Order from './pages/Order/Order';
 
 
 function App() {
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+	const updateUser = (value) => setUser(value);
+
 	return (
 		<Fragment>
 			<ToastContainer />
 
-			<UserContext.Provider value={{ name: 'default', isAdmin: true }}>
-				<TokenContext.Provider value={() => {}}>
-					<Navbar />
-					<Routes>
-						<Route path='/product/:productId' element={<Product />} />
-						<Route path='/category/:categoryName' element={<CategoryProducts />} />
-						<Route path='/cart' element={<Cart />} />
-						<Route path='/login' element={<Register isRegister={false} />} />
-						<Route path='/register' element={<Register />} />
-						<Route path='/' element={<Home />} />
-                        <Route path='/admin' element={<Admin/>}></Route>
-					</Routes>
-				</TokenContext.Provider>
+			<UserContext.Provider value={{ user, updateUser }}>
+				<Navbar />
+				<Routes>
+					<Route path='/product/:productId' element={<Product />} />
+					<Route path='/category/:categoryName' element={<CategoryProducts />} />
+					<Route path='/cart' element={<Cart />} />
+					<Route path='/login' element={<Register isRegister={false} updateUser={updateUser} />} />
+					<Route path='/register' element={<Register updateUser={updateUser} />} />
+					<Route path='/admin' element={<Admin/>}></Route>
+					<Route path='/order' element={<Order/>}></Route>
+
+					<Route path='/' element={<Home />} />
+				</Routes>
 			</UserContext.Provider>
 		</Fragment>
 	);

@@ -2,23 +2,22 @@ import styles from './navbar.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaAmazon, FaUser } from 'react-icons/fa';
 import { useContext } from 'react';
-import { TokenContext, UserContext } from '../../context/TokenContext';
-import { useCookies } from 'react-cookie';
+import { UserContext } from '../../context/TokenContext';
 import { successMsg } from '../../utils/toastUtils';
 import { NavbarDropdown } from './NavbarDropdown/NavbarDropdown';
 import { CATEGORIES } from '../../utils/mocks';
-import { getIsAdmin } from '../../utils/userUtils';
 
 const Navbar = () => {
-	const userDetails = useContext(UserContext);
-	const [cookies, setCookie, removeItem] = useCookies();
 	const navigate = useNavigate();
+	const { user } = useContext(UserContext);
 
 	const handleLogout = () => {
-		removeItem('ecommerceToken');
+		localStorage.removeItem('user');
 		successMsg('You Logged Out Successfully!');
 		navigate('/');
+		navigate(0);
 	};
+	console.log(user)
 	return (
 		<nav className={styles.navbar}>
 			<div className={styles.leftIcons}>
@@ -37,7 +36,7 @@ const Navbar = () => {
 				</>
 			</div>
 			<div className={styles.rightIcons}>
-				{!cookies.ecommerceToken ? (
+				{!user ? (
 					<Link to='login' className={styles.icon}>
 						login
 					</Link>
@@ -51,21 +50,16 @@ const Navbar = () => {
 							handleLogout={handleLogout}
 							mainText={
 								<>
-									{' '}
 									<FaUser />
-									{userDetails.name}
+									{user.displayName}
 								</>
 							}
 							options={[
 								{
-									onClick: () => navigate('/orders'),
-									text: 'Orders',
+									onClick: () => navigate('/order'),
+									text: 'Order',
 								},
-								{
-									onClick: () => navigate('/profile'),
-									text: 'Profile',
-								},
-								userDetails.isAdmin && {
+								user.isAdmin && {
 									onClick: () => navigate('/admin'),
 									text: 'Admin',
 								},

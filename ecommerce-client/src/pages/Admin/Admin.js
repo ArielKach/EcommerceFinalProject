@@ -1,7 +1,7 @@
 import styles from './Admin.module.css'
 import { Calendar } from './Calendar';
 const Admin = () => {
-    const currnetUsersCount = 10;
+    const currentUsersCount = 10;
 
     const rawData = [{ date: new Date('2023-01-02'), sum: 1000 }, { date: new Date('2023-01-04'), sum: 1040 }, { date: new Date('2023-03-04'), sum: 10400 }]
     const filledData = (data) => {
@@ -31,8 +31,8 @@ const Admin = () => {
         <div className={styles.container}>
             <div className={styles.infoText}>Store information</div>
             <div className={styles.usersInfo}>
-                <div className={styles.currentUsersText}>Currnet users count: </div>
-                <div className={styles.currentUsersCount}>{currnetUsersCount}</div>
+                <div className={styles.currentUsersText}>Current users count: </div>
+                <div className={styles.currentUsersCount}>{currentUsersCount}</div>
             </div>
 
             <div className={styles.orderSumText}>
