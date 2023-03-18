@@ -9,6 +9,7 @@ import { UserContext } from './context/TokenContext';
 import { ToastContainer } from 'react-toastify';
 import CategoryProducts from './pages/CategoryProducts/CategoryProducts';
 import Admin from "./pages/Admin/Admin";
+import Order from './pages/Order/Order';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
 					<Route path='/login' element={<Register isRegister={false} updateUser={updateUser} />} />
 					<Route path='/register' element={<Register updateUser={updateUser} />} />
 					<Route path='/admin' element={<Admin/>}></Route>
+					<Route path='/order' element={<Order/>}></Route>
 
 					<Route path='/' element={<Home />} />
 				</Routes>

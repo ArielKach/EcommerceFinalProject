@@ -56,12 +56,8 @@ const Navbar = () => {
 							}
 							options={[
 								{
-									onClick: () => navigate('/orders'),
-									text: 'Orders',
-								},
-								{
-									onClick: () => navigate('/profile'),
-									text: 'Profile',
+									onClick: () => navigate('/order'),
+									text: 'Order',
 								},
 								user.isAdmin && {
 									onClick: () => navigate('/admin'),
