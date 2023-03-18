@@ -1,0 +1,30 @@
+.login {
+	display: grid;
+	grid-auto-flow: row;
+	grid-gap: 1rem;
+	width: 30%;
+	align-self: center;
+	margin: 10rem 0rem;
+}
+
+.center {
+	margin: auto;
+}
+
+.loginButton {
+	font-weight: 800;
+	font-size: 1.25rem;
+}
+
+.title {
+	text-align: center;
+	margin-bottom: 4rem;
+}
+
+.forgotPassword {
+	cursor: pointer;
+}
+
+.forgotPassword:hover {
+	color: var(--bs-blue);
+}
