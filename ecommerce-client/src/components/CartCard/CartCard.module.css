@@ -58,6 +58,8 @@
   outline: none;
   width: 2.6rem;
   height: 2rem;
+  caret-color: transparent;
+
 }
 
 .price::after {
