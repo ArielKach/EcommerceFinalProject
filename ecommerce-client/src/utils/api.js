@@ -41,3 +41,7 @@ export const addToCart = (userId, product) => {
 		}
 	);
 };
+
+export const getCategories = () => {
+	return axios.get(`${apiUrl}/category/`);
+}
