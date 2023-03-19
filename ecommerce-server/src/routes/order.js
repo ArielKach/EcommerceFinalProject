@@ -32,44 +32,12 @@ router.post('/', auth, async (req, res) => {
         ]);
 
         await cart.updateOne({ products: [] });
+        await cart.updateOne({ active: false });
         await cart.save();
 
         res.status(200).send(order[0]._doc._id);
     } catch (error) {
         res.status(400).send('Error in Get Products');
-    }
-});
-
-router.get('/usersSum', async (req, res) => {
-    try {
-        const mapFunction = function () {
-            emit(this.userId, this.totalPrice);
-        };
-
-        const reduceFunction = function (key, values) {
-            values = values.map(value => parseInt(value));
-            return Array.sum(values);
-        };
-
-        Order.mapReduce(
-            {
-                map: mapFunction,
-                reduce: reduceFunction,
-            },
-            function (err, results) {
-                if (err) throw err;
-                res.status(200).send(
-                    results.results.map(r => ({
-                        ...r,
-                        value: parseInt(r.value),
-                    })),
-                );
-            },
-        );
-    } catch (error) {
-        console.log(error);
-
-        res.status(400).send('Error in get Product');
     }
 });
 
