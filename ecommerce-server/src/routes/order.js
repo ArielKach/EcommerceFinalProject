@@ -31,7 +31,7 @@ router.post('/', auth, async (req, res) => {
 			},
 		]);
 
-		await cart.updateOne({ products: [] });
+        await cart.updateOne({ products: [] });
 		await cart.save();
 
 		res.status(200).send(order[0]._doc._id);
