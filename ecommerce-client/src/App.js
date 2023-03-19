@@ -12,13 +12,16 @@ import Admin from "./pages/Admin/Admin";
 import Order from './pages/Order/Order';
 import { getCategories } from './utils/api';
 import { CircularProgress } from '@mui/material';
+import useWebSocket from 'react-use-websocket';
 
 
 function App() {
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+	const [connectedUsers, setConnectedUsers] = useState(0);
 	const updateUser = (value) => setUser(value);
 	const [categories, setCategories] = useState([])
 	const [isCategoriesLoading, setIsCategoriesLoading] = useState(false)
+	const { lastMessage, sendMessage } = useWebSocket('ws://localhost:3001');
 
 	const fetchCategories = async () => {
 		setIsCategoriesLoading(true);
@@ -29,6 +32,20 @@ function App() {
 	useEffect(() => {
 		fetchCategories();
 	}, [])
+
+
+	useEffect(() => {
+		if (lastMessage) {
+			setConnectedUsers(lastMessage.data);
+		}
+	}, [lastMessage]);
+
+	useEffect(() => {
+		if (user && user.uId) {
+			sendMessage(JSON.stringify({ userId: user.uId }));
+		}
+	}, [user]);
+
 	return (
 		<Fragment>
 			<ToastContainer />
@@ -43,7 +60,7 @@ function App() {
 							<Route path='/cart' element={<Cart />} />
 							<Route path='/login' element={<Register isRegister={false} updateUser={updateUser} />} />
 							<Route path='/register' element={<Register updateUser={updateUser} />} />
-							<Route path='/admin' element={<Admin />}></Route>
+							<Route path='/admin' element={<Admin currentUsersCount={connectedUsers} />}></Route>
 							<Route path='/order' element={<Order />}></Route>
 
 							<Route path='/' element={<Home />} />

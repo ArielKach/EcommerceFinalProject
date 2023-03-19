@@ -1,7 +1,6 @@
 import styles from './Admin.module.css'
 import { Calendar } from './Calendar';
-const Admin = () => {
-    const currentUsersCount = 10;
+const Admin = ({currentUsersCount}) => {
 
     const rawData = [{ date: new Date('2023-01-02'), sum: 1000 }, { date: new Date('2023-01-04'), sum: 1040 }, { date: new Date('2023-03-04'), sum: 10400 }]
     const filledData = (data) => {
