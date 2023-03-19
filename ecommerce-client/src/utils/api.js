@@ -1,10 +1,9 @@
-import { PROCUCTS } from './mocks';
 import axios from 'axios';
 
 export const apiUrl = 'http://localhost:3001/api';
 
 export const getProductData = (productId) => {
-	return PROCUCTS.find((product) => product.id === productId);
+	return axios.get(`${apiUrl}/product/id/${productId}`);
 };
 
 export const getProducts = () => {
@@ -20,9 +19,25 @@ export const getCart = (userId) => {
 };
 
 export const deleteCart = (userId) => {
-	return axios.put(`${apiUrl}/cart`,{}, {
-		headers: {
-			userId,
-		},
-	});
+	return axios.put(
+		`${apiUrl}/cart`,
+		{},
+		{
+			headers: {
+				userId,
+			},
+		}
+	);
+};
+
+export const addToCart = (userId, product) => {
+	return axios.post(
+		`${apiUrl}/cart/addProduct`,
+		{ product },
+		{
+			headers: {
+				userId,
+			},
+		}
+	);
 };
