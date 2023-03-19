@@ -77,7 +77,6 @@ const Cart = () => {
 								quantity={product.quantity}
 								handleQuantityChange={(e) => handleQuantityChange(e, product.productId)}
 								removeProduct={() => {
-									console.log(product);
 									removeProduct(product.productId);
 								}}
 							/>

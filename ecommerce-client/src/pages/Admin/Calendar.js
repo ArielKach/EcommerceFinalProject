@@ -98,7 +98,6 @@ export const Calendar = ({ data,
       .attr("y", i => countDay(X[i].getUTCDay()) * cellSize + 0.5)
       .attr("fill", i => color(Y[i]));
 
-      console.log(formattedTitle)
     if (formattedTitle) cell.append("title")
       .text(formattedTitle);
 

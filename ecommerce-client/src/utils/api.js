@@ -60,24 +60,25 @@ export const updateProductQuantity = (userId, productId, quantity) => {
 };
 
 export const removeProductFromCart = (userId, productId) => {
-	return axios.delete(
-		`${apiUrl}/cart/delete-product/${productId}`,
-		{
-			headers: {
-				userId,
-			},
-		}
-	);
+	return axios.delete(`${apiUrl}/cart/delete-product/${productId}`, {
+		headers: {
+			userId,
+		},
+	});
 };
 
 export const getCategories = () => {
 	return axios.get(`${apiUrl}/category/`);
-}
+};
 
 export const getProductsByCategory = (category) => {
-    return axios.get(`${apiUrl}/product/${category}`);
+	return axios.get(`${apiUrl}/product/${category}`);
 };
 
 export const getProductsByName = (name) => {
-    return axios.get(`${apiUrl}/product/search/${name}`);
+	return axios.get(`${apiUrl}/product/search/${name}`);
+};
+
+export const getOrdersSumByDates = () => {
+	return axios.get(`${apiUrl}/order/dates`);
 };
