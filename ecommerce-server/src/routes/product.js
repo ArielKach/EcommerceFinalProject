@@ -39,9 +39,12 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
+
+
+router.get('/search/:name', async (req, res) => {
+    const name = req.params.name
     try {
-        let products = await Product.find();
+        let products = await Product.find({name: { $regex: new RegExp(name, 'i') }});
         res.status(200).send(products);
     } catch (error) {
         res.status(400).send('Error in get Products');
@@ -50,7 +53,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:category', async (req, res) => {
     // destructure page and limit and set default values
-    const { query, inStock, page = 1, limit = 10 } = req.query;
+    const { query, page = 1, limit = 10 } = req.query;
     const category = req.params.category !== "all" ? req.params.category : "";
 
     try {
@@ -59,8 +62,7 @@ router.get('/:category', async (req, res) => {
             allProducts = await Product.find({
                 $and: [
                     {
-                        ...(inStock && { inStock: inStock }),
-                        ...(category && { category: category }),
+                        categoryName: category
                     },
                     { name: { $regex: new RegExp(query, 'i') } },
                 ],
@@ -70,8 +72,7 @@ router.get('/:category', async (req, res) => {
                 .exec();
         } else {
             allProducts = await Product.find({
-                ...(category && { category: category }),
-                ...(inStock && { inStock: inStock }),
+                categoryName: category
             })
                 .limit(limit * 1)
                 .skip((page - 1) * limit)

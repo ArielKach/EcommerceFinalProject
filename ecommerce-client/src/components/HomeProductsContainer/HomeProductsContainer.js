@@ -4,18 +4,18 @@ import ProductCard from "../ProductCard/ProductCard";
 const ProductsContainer = ({products}) => {
     return (
         <div className={styles.productsContainer}>
-            {products.map((product) => (
+            {products.length > 0 ? products.map((product) => (
                 <ProductCard
                     key={`product${product._id}`}
                     id={product._id}
-                    title={product.title}
+                    title={product.name}
                     price={product.price}
                     imageUrl={product.image}
                     description={product.description}
                     brand={product.brand}
-                    category={product.category}
+                    category={product.categoryName}
                 />
-            ))}
+            )): <div className={styles.noProductsFound}>No products found...</div>}
         </div>
     );
 };
