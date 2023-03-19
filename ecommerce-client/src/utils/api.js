@@ -30,24 +30,45 @@ export const deleteCart = (userId) => {
   );
 };
 
-export const addToCart = (userId, product) => {
-  return axios.post(
-    `${apiUrl}/cart/addProduct`,
-    { product },
-    {
-      headers: {
-        userId,
-      },
-    }
-  );
+export const addToCart = (userId, productInfo) => {
+	const product = { ...productInfo };
+	product.productId = product['_id'];
+	delete product['_id'];
+	delete product['__v'];
+
+	return axios.post(
+		`${apiUrl}/cart/addProduct`,
+		{ product },
+		{
+			headers: {
+				userId,
+			},
+		}
+	);
+};
+
+export const updateProductQuantity = (userId, productId, quantity) => {
+	return axios.post(
+		`${apiUrl}/cart/updateProductQuantity`,
+		{ productId, quantity },
+		{
+			headers: {
+				userId,
+			},
+		}
+	);
+};
+
+export const removeProductFromCart = (userId, productId) => {
+	return axios.delete(`${apiUrl}/cart/delete-product/${productId}`, {
+		headers: {
+			userId,
+		},
+	});
 };
 
 export const getCategories = () => {
   return axios.get(`${apiUrl}/category/`);
-};
-
-export const getProductsByCategory = (category) => {
-  return axios.get(`${apiUrl}/product/${category}`);
 };
 
 export const getOrderSum = (userId) => {
@@ -68,4 +89,16 @@ export const addOrder = (userId, productIds, totalPrice) => {
       },
     }
   );
+};
+
+export const getProductsByCategory = (category) => {
+	return axios.get(`${apiUrl}/product/${category}`);
+};
+
+export const getProductsByName = (name) => {
+	return axios.get(`${apiUrl}/product/search/${name}`);
+};
+
+export const getOrdersSumByDates = () => {
+	return axios.get(`${apiUrl}/order/dates`);
 };

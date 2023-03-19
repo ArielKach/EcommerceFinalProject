@@ -8,7 +8,7 @@ const ProductsContainer = ({products}) => {
                 <ProductCard
                     key={`product${product._id}`}
                     id={product._id}
-                    title={product.title}
+                    title={product.name}
                     price={product.price}
                     imageUrl={product.image}
                     description={product.description}

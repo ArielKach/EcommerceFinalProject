@@ -2,7 +2,7 @@
     box-sizing: border-box;
     padding-inline: 1rem;
     display: flex;
-    margin-top: 3rem;
+    margin-top: 1rem;
     gap: 3rem;
     padding-bottom: 4rem;
 }
@@ -15,4 +15,19 @@
     .sortAndFilter {
         flex-direction: row;
     }
+}
+
+.search {
+    display: flex;
+    color: black;
+    font-size: 2rem;
+    border-radius: 5px;
+    margin-top: 2rem;
+    background-color: white;
+    margin-left: 1rem;
+}
+
+.search::placeholder {
+    color: black;
+    opacity: 65%;
 }
