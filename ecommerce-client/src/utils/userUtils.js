@@ -30,7 +30,7 @@ export const register = async (email, password, name) => {
 				email: data.user.email,
 				uId: data.user.uid,
 			});
-		return { ...data.user, isAdmin: false, displayName: name };
+		return { ...data.user, isAdmin: false, displayName: name, uId: data.user.uid };
 	} catch (error) {
 		throw new Error(parseErorr(error));
 	}

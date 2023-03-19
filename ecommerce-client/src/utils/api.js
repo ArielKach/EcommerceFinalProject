@@ -30,7 +30,12 @@ export const deleteCart = (userId) => {
 	);
 };
 
-export const addToCart = (userId, product) => {
+export const addToCart = (userId, productInfo) => {
+	const product = { ...productInfo };
+	product.productId = product['_id'];
+	delete product['_id'];
+	delete product['__v'];
+
 	return axios.post(
 		`${apiUrl}/cart/addProduct`,
 		{ product },
@@ -42,6 +47,29 @@ export const addToCart = (userId, product) => {
 	);
 };
 
+export const updateProductQuantity = (userId, productId, quantity) => {
+	return axios.post(
+		`${apiUrl}/cart/updateProductQuantity`,
+		{ productId, quantity },
+		{
+			headers: {
+				userId,
+			},
+		}
+	);
+};
+
+export const removeProductFromCart = (userId, productId) => {
+	return axios.delete(
+		`${apiUrl}/cart/delete-product/${productId}`,
+		{
+			headers: {
+				userId,
+			},
+		}
+	);
+};
+
 export const getCategories = () => {
 	return axios.get(`${apiUrl}/category/`);
-}
+};

@@ -21,11 +21,7 @@ const Product = () => {
 	}, [productId]);
 
 	const handleAdd = () => {
-		const product = { ...productInfo };
-		product.productId = product['_id'];
-		delete product['_id'];
-    delete product['__v'];
-		addToCart(user.uId, product);
+		addToCart(user.uId, productInfo);
 	};
 
 	if (productInfo) {

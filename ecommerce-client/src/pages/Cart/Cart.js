@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import CartCard from '../../components/CartCard/CartCard';
 import { FaShoppingCart } from 'react-icons/fa';
 import { CircularProgress } from '@mui/material';
-import { deleteCart, getCart } from '../../utils/api';
+import { deleteCart, getCart, removeProductFromCart, updateProductQuantity } from '../../utils/api';
 import { UserContext } from '../../context/UserContext';
 
 const Cart = () => {
@@ -37,6 +37,25 @@ const Cart = () => {
 		if (cartProducts.length > 0) calculateTotalPrice();
 	}, [cartProducts]);
 
+
+	const handleQuantityChange = async (e, productId) => {
+		const newQuantity = Number(e.target.value);
+		const result = await updateProductQuantity(user.uId, productId, newQuantity);
+		setCartProducts((cartProducts) =>
+			cartProducts.map((product) => {
+				if (product.productId === productId) {
+					return { ...product, quantity: result.data.quantity };
+				}
+				return { ...product };
+			})
+		);
+	};
+
+	const removeProduct = async (productId) => {
+		await removeProductFromCart(user.uId, productId);
+		setCartProducts((cartProducts) => cartProducts.filter((product) => product.productId !== productId));
+	};
+
 	return isLoading ? (
 		<div style={{ textAlign: 'center', marginTop: '6rem' }}>
 			<CircularProgress size={150} />
@@ -51,8 +70,17 @@ const Cart = () => {
 					</div>
 
 					<div className={styles.productsContainer}>
-						{cartProducts.map((item) => (
-							<CartCard key={`cart-item${item.productId}`} productData={item} quantity={item.quantity} />
+						{cartProducts.map((product) => (
+							<CartCard
+								key={`cart-item${product.productId}`}
+								productData={product}
+								quantity={product.quantity}
+								handleQuantityChange={(e) => handleQuantityChange(e, product.productId)}
+								removeProduct={() => {
+									console.log(product);
+									removeProduct(product.productId);
+								}}
+							/>
 						))}
 					</div>
 
