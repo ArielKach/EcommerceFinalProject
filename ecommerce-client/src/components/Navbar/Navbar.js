@@ -57,6 +57,10 @@ const Navbar = ({categories}) => {
 									onClick: () => navigate('/order'),
 									text: 'Order',
 								},
+								{
+									onClick: () => navigate('/orders'),
+									text: 'Orders',
+								},
 								user.isAdmin && {
 									onClick: () => navigate('/admin'),
 									text: 'Admin',

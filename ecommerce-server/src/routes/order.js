@@ -138,21 +138,7 @@ router.post('/delete/:id', async (req, res) => {
 
 router.get('/', auth, async (req, res) => {
 	try {
-		if (!req.payload.email) return res.status(400).send('details are not as expected');
-
-		const userId = req.payload.userId;
-
-		let orders = await Order.find({ userId });
-		let products;
-		let returnOrders = [];
-		for (let order of orders) {
-			products = await Product.find({ _id: { $in: order.productIds } });
-			returnOrders.push({
-				...order._doc,
-				products: products.map((product) => product._doc),
-			});
-		}
-		res.status(200).send([...returnOrders]);
+		res.send(await Order.find({ userId: req.payload.userId }));
 	} catch (error) {
 		console.log(error);
 		res.status(400).send('Error in get Product');

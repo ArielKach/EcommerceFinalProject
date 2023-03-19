@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import CategoryProducts from './pages/CategoryProducts/CategoryProducts';
 import Admin from "./pages/Admin/Admin";
 import Order from './pages/Order/Order';
+import Orders from './pages/Orders/Orders';
 import { getCategories } from './utils/api';
 import { CircularProgress } from '@mui/material';
 import useWebSocket from 'react-use-websocket';
@@ -62,6 +63,7 @@ function App() {
 							<Route path='/register' element={<Register updateUser={updateUser} />} />
 							<Route path='/admin' element={<Admin currentUsersCount={connectedUsers} />}></Route>
 							<Route path='/order' element={<Order />}></Route>
+							<Route path='/orders' element={<Orders />}></Route>
 
 							<Route path='/' element={<Home />} />
 						</Routes>

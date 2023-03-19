@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getOrdersSumByDates } from '../../utils/api';
 import styles from './Admin.module.css';
 import { Calendar } from './Calendar';
-const Admin = ({currentUsersCount}) => {
+const Admin = ({ currentUsersCount }) => {
 	const [rawData, setRawData] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -53,7 +53,7 @@ const Admin = ({currentUsersCount}) => {
 		return null;
 	}
 	if (isLoading) {
-		<div style={{ textAlign: 'center', marginTop: '6rem' }}>
+		return <div style={{ textAlign: 'center', marginTop: '6rem' }}>
 			<CircularProgress size={150} />
 		</div>;
 	}

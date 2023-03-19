@@ -82,3 +82,11 @@ export const getProductsByName = (name) => {
 export const getOrdersSumByDates = () => {
 	return axios.get(`${apiUrl}/order/dates`);
 };
+
+export const getOrdersByUserId = (userId) => {
+	return axios.get(`${apiUrl}/order/`, {
+		headers: {
+			userId,
+		},
+	});
+};
