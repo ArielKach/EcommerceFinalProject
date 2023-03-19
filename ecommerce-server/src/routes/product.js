@@ -15,7 +15,6 @@ const productSchema = joi.object({
 
 router.post('/', auth, async (req, res) => {
     try {
-        // Check if the the user is Admin
         if (!req.payload.isAdmin)
             return res.status(400).send('Only Admin can add Products');
 
@@ -103,7 +102,6 @@ router.get('/id/:id', async (req, res) => {
 
 router.put('/:id', auth, async (req, res) => {
     try {
-        // Check if the the user is Admin
         if (!req.payload.isAdmin)
             return res.status(400).send('Only Admin can update Products');
 
@@ -125,7 +123,6 @@ router.put('/:id', auth, async (req, res) => {
 
 router.delete('/:id', auth, async (req, res) => {
     try {
-        // Check if the the user is Admin
         if (!req.payload.isAdmin)
             return res.status(400).send('Only Admin can delete Products');
 

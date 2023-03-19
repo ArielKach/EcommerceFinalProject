@@ -16,15 +16,15 @@ router.post('/', auth, async (req, res) => {
         const { error } = productSchema.validate(req.body);
         if (error) return res.status(400).send('details are not as expected');
 
-        const headerUserId = req.headers.userid;
+        const userId = req.payload.userId;
 
-        let cart = await Cart.findOne({ userId: headerUserId });
+        let cart = await Cart.findOne({ userId });
 
         if (!cart) return res.status(400).send('cart not found');
 
         let order = await Order.insertMany([
             {
-                userId: headerUserId,
+                userId,
                 productIds: req.body.productIds,
                 totalPrice: req.body.totalPrice,
                 orderDate: new Date().getTime().toString(),
@@ -106,9 +106,9 @@ router.get('/', auth, async (req, res) => {
         if (!req.payload.email)
             return res.status(400).send('details are not as expected');
 
-        const headerUserId = req.headers.userid;
+        const userId = req.payload.userId;
 
-        let orders = await Order.find({ userId: headerUserId });
+        let orders = await Order.find({ userId });
         let products;
         let returnOrders = [];
         for (let order of orders) {
@@ -127,11 +127,11 @@ router.get('/', auth, async (req, res) => {
 
 router.get('/getInfo/historyCategories', auth, async (req, res) => {
     try {
-        const headerUserId = req.headers.userid;
+        const userId = req.payload.userId;
 
         let orders = await Order.aggregate([
             {
-                $match: { userId: headerUserId },
+                $match: { userId },
             },
             {
                 $unwind: { path: '$productIds' },

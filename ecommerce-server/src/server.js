@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const { mongoConnection } = require("./mongo/mongo-connection");
 
 // Routes
-const user = require('./routes/user');
 const product = require('./routes/product');
 const cart = require('./routes/cart');
 const order = require('./routes/order');
@@ -18,11 +17,10 @@ app.use(bodyParser.json());
 app.use(cors({
     origin: '*',
     credentials: true,
-    optionSuccessStatus: 200
+    optionSuccessStatus: 200,
 }));
 
-// Routes uses
-app.use('/api/profile', user);
+
 app.use('/api/product', product);
 app.use('/api/cart', cart);
 app.use('/api/order', order);

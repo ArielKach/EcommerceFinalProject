@@ -1,33 +1,26 @@
 import styles from "./CartCard.module.css";
 import {FaTrashAlt} from "react-icons/fa";
-import {useState} from "react";
 import {Link} from "react-router-dom";
-import {getProductData} from "../../utils/api";
 
 
-const CartCard = ({productId, quantity}) => {
-    const [productData, _] = useState(
-        getProductData(productId)
-    );
+const CartCard = ({productData, quantity}) => {
 
     const handleQuantityChange = (e) => {
         const currentQuantity = Number(e.target.value);
-
-    };
-
+    };    
 
     return (
         <div className={styles.container}>
             <div className={styles.leftContent}>
                 <div className={styles.imageWrapper}>
-                    <Link to={`/product/${productId}`}>
-                        <img src={productData?.imageUrl} className={styles.image} alt=""/>
+                    <Link to={`/product/${productData.productId}`}>
+                        <img src={productData?.image} className={styles.image} alt=""/>
                     </Link>
                 </div>
 
                 <div className={styles.info}>
                     <h2 className={styles.title}>
-                        <Link to={`/product/${productId}`}>{productData?.title}</Link>
+                        <Link to={`/product/${productData.productId}`}>{productData?.name}</Link>
                     </h2>
                     <div className={styles.description}>{productData?.description}</div>
                 </div>

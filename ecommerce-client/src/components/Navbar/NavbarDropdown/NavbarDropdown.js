@@ -16,7 +16,6 @@ export const NavbarDropdown = ({ mainText, options }) => {
 				aria-expanded={open ? 'true' : undefined}
 				onClick={handleClick}
 				className={styles.icon}
-				onMouseOver={handleClick}
 			>
 				{mainText}
 			</div>
@@ -27,7 +26,6 @@ export const NavbarDropdown = ({ mainText, options }) => {
 				onClose={handleClose}
 				MenuListProps={{
 					'aria-labelledby': 'basic-button',
-					onMouseLeave: handleClose,
 				}}
 			>
 				{options.map((option, i) => (
