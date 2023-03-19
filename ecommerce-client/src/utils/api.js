@@ -49,3 +49,7 @@ export const getCategories = () => {
 export const getProductsByCategory = (category) => {
     return axios.get(`${apiUrl}/product/${category}`);
 };
+
+export const getProductsByName = (name) => {
+    return axios.get(`${apiUrl}/product/search/${name}`);
+};
