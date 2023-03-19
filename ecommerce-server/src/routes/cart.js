@@ -12,28 +12,39 @@ const productSchema = joi.object({
 	description: joi.string().required().min(6),
 	image: joi.string().required(),
 	brand: joi.string().required(),
-	quantity: joi.number().required(),
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/addProduct', auth, async (req, res) => {
 	try {
-		const { error } = productSchema.validate(req.body);
+		const { error } = productSchema.validate(req.body.product);
 		if (error) return res.status(400).send(error.message);
 
 		const userId = req.payload.userId;
 
 		let cart = await Cart.findOne({ userId });
-
 		if (!cart) {
 			await Cart.insertMany([{ userId, active: true }]);
 			cart = await Cart.findOne({ userId });
 		}
 
-		cart.products.push(req.body);
-		await cart.save();
-		res.status(200).send(cart.products);
+		const updatedCart = await Cart.findOneAndUpdate(
+			{
+				userId,
+				'products.productId': req.body.product.productId,
+			},
+			{ $inc: { 'products.$.quantity': 1 } }
+		);
+		if (updatedCart) {
+			res.send(updatedCart.products);
+		} else {
+			const updateResult = await Cart.findOneAndUpdate(
+				{ userId },
+				{ $addToSet: { products: { ...req.body.product, quantity: 1 } } },
+				{ new: true }
+			);
+			res.send(updateResult);
+		}
 	} catch (error) {
-		console.log(error);
 		res.status(400).send(error);
 	}
 });
