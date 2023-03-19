@@ -5,9 +5,8 @@ import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { successMsg } from '../../utils/toastUtils';
 import { NavbarDropdown } from './NavbarDropdown/NavbarDropdown';
-import { CATEGORIES } from '../../utils/mocks';
 
-const Navbar = () => {
+const Navbar = ({categories}) => {
 	const navigate = useNavigate();
 	const { user } = useContext(UserContext);
 
@@ -27,7 +26,7 @@ const Navbar = () => {
 				<>
 					<NavbarDropdown
 						mainText={'Categories'}
-						options={CATEGORIES.map((category) => ({
+						options={categories.map((category) => ({
 							text: category,
 							onClick: () => navigate(`/category/${category}`),
 						}))}

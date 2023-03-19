@@ -26,3 +26,7 @@ export const deleteCart = (userId) => {
 		},
 	});
 };
+
+export const getCategories = () => {
+	return axios.get(`${apiUrl}/category/`);
+}
