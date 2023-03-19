@@ -1,5 +1,4 @@
 import styles from "./Home.module.css";
-import { PROCUCTS } from "../../utils/mocks";
 import HomeProductsContainer from "../../components/HomeProductsContainer/HomeProductsContainer"
 import { Fragment, useEffect, useState } from "react";
 import { CircularProgress } from '@mui/material';

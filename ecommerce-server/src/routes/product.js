@@ -59,8 +59,7 @@ router.get('/:category', async (req, res) => {
             allProducts = await Product.find({
                 $and: [
                     {
-                        ...(inStock && { inStock: inStock }),
-                        ...(category && { category: category }),
+                        categoryName: category
                     },
                     { name: { $regex: new RegExp(query, 'i') } },
                 ],
@@ -70,8 +69,7 @@ router.get('/:category', async (req, res) => {
                 .exec();
         } else {
             allProducts = await Product.find({
-                ...(category && { category: category }),
-                ...(inStock && { inStock: inStock }),
+                categoryName: category
             })
                 .limit(limit * 1)
                 .skip((page - 1) * limit)

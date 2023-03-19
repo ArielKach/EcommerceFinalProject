@@ -6,11 +6,11 @@ const ProductsContainer = ({products}) => {
         <div className={styles.productsContainer}>
             {products.map((product) => (
                 <ProductCard
-                    key={`product${product.id}`}
-                    id={product.id}
+                    key={`product${product._id}`}
+                    id={product._id}
                     title={product.title}
                     price={product.price}
-                    imageUrl={product.imageUrl}
+                    imageUrl={product.image}
                     description={product.description}
                 />
             ))}

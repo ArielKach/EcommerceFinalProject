@@ -30,3 +30,7 @@ export const deleteCart = (userId) => {
 export const getCategories = () => {
 	return axios.get(`${apiUrl}/category/`);
 }
+
+export const getProductsByCategory = (category) => {
+    return axios.get(`${apiUrl}/product/${category}`);
+};
