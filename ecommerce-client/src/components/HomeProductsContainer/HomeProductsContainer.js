@@ -13,7 +13,7 @@ const ProductsContainer = ({products}) => {
                     imageUrl={product.image}
                     description={product.description}
                     brand={product.brand}
-                    category={product.category}
+                    category={product.categoryName}
                 />
             ))}
         </div>
