@@ -71,9 +71,14 @@ export const getCategories = () => {
 	return axios.get(`${apiUrl}/category/`);
 };
 
-export const getProductsByCategory = (category) => {
-	return axios.get(`${apiUrl}/product/${category}`);
+export const getProductsByCategory = (category, brands) => {
+	return axios.get(`${apiUrl}/product/${category}?brands=${brands.join(',')}`);
 };
+
+export const getBrandsByCategory = (category) => {
+	return axios.get(`${apiUrl}/product/brands/${category}`);
+};
+
 
 export const getProductsByName = (name) => {
 	return axios.get(`${apiUrl}/product/search/${name}`);
