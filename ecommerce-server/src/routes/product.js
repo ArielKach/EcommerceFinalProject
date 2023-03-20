@@ -54,7 +54,7 @@ router.get('/search/:name', async (req, res) => {
 router.get('/:category', async (req, res) => {
     const category = req.params.category
     const { brands } = req.query;
-    const brandsArray = brands.split(',')
+    const brandsArray = brands.split(',');
     const products = await Product.find({
         $and: [{ categoryName: category }, { brand: { $in: brandsArray } }]
     })

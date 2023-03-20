@@ -6,7 +6,7 @@ export const Calendar = ({ data,
   y = ([, y]) => y, // given d in data, returns the (quantitative) y-value
   title, // given d in data, returns the title text
   width = 928, // width of the chart, in pixels
-  cellSize = 18, // width and height of an individual day, in pixels
+  cellSize = 21, // width and height of an individual day, in pixels
   weekday = "sunday", // either: weekday, sunday, or monday
   formatDay = i => "SMTWTFS"[i], // given a day number in [0, 6], the day-of-week label
   formatMonth = "%b", // format specifier string for months (above the chart)
@@ -20,7 +20,6 @@ export const Calendar = ({ data,
     const X = d3.map(data, x);
     const Y = d3.map(data, y);
     const I = d3.range(X.length);
-
     const countDay = weekday === "sunday" ? i => i : i => (i + 6) % 7;
     const timeWeek = weekday === "sunday" ? d3.utcSunday : d3.utcMonday;
     const weekDays = weekday === "weekday" ? 5 : 7;

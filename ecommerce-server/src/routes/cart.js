@@ -3,7 +3,6 @@ const router = express.Router();
 const auth = require("../general/auth");
 const joi = require("joi");
 const Cart = require("../mongo/models/cart");
-const { update } = require("../mongo/models/cart");
 
 const productSchema = joi.object({
   productId: joi.string(),

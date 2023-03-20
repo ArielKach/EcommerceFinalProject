@@ -78,7 +78,6 @@ router.get("/", auth, async (req, res) => {
   try {
     res.send(await Order.find({ userId: req.payload.userId }));
   } catch (error) {
-    console.log(error);
     res.status(400).send("Error in get Product");
   }
 });

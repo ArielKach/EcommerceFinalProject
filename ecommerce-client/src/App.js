@@ -69,13 +69,14 @@ const App = () => {
                 path="/register"
                 element={<Register updateUser={updateUser} />}
               />
-              <Route
+
+              {user.isAdmin && <Route
                 path="/admin"
                 element={<Admin currentUsersCount={connectedUsers} />}
-              />
+              />}
               <Route path="/order" element={<Order />} />
               <Route path="/orders" element={<Orders />} />
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home />}  />
             </Routes>
           </Fragment>
         ) : (

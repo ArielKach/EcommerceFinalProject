@@ -92,7 +92,7 @@ export const addOrder = (userId, productIds, totalPrice) => {
 };
 
 export const getProductsByCategory = (category, brands) => {
-	return axios.get(`${apiUrl}/product/${category}?brands=${brands.join(',')}`);
+	return axios.get(`${apiUrl}/product/${category}?brands=${encodeURIComponent(brands.join(','))}`);
 };
 
 export const getBrandsByCategory = (category) => {
