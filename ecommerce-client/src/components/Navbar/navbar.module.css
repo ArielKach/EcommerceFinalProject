@@ -49,8 +49,13 @@
 
 .leftIcons > * {
 	height: 100%;
+	cursor: pointer;
 	padding: 0 10px;
 	color: var(--navbar-text);
+}
+
+.leftIcons > *:hover {
+	background-color: var(--navbar-hover);
 }
 
 .icon {
