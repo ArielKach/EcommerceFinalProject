@@ -54,10 +54,6 @@ const Navbar = ({categories}) => {
 							}
 							options={[
 								{
-									onClick: () => navigate('/order'),
-									text: 'Order',
-								},
-								{
 									onClick: () => navigate('/orders'),
 									text: 'Orders',
 								},

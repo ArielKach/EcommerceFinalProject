@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { addOrder, getCart, getOrderSum } from "../../utils/api";
 import styles from "./Order.module.css";
+import { NotificationManager } from "react-notifications";
+import Swal from "sweetalert2";
 
 const Order = () => {
   const navigate = useNavigate();
@@ -18,11 +20,13 @@ const Order = () => {
       setOrder(cart.data);
     }
 
-    const price = await getOrderSum(user.uId);
-    if (price && price.data) {
-      setTotalPrice(price.data);
+    if (totalPrice === "") {
+      const price = await getOrderSum(user.uId);
+      if (price && price.data) {
+        setTotalPrice(price.data);
+      }
     }
-    
+
     setIsLoading(false);
   };
 
@@ -31,12 +35,21 @@ const Order = () => {
     fetchCart();
   }, []);
 
-
-  const handleSubmit = async () => {
-    const productIds = order.map((product) => {return product.productId});
-    await addOrder(user.uId, productIds, totalPrice);
-    navigate('/');
-    navigate(0);
+  const handleSubmit = () => {
+    const productIds = order.map((product) => {
+      return product.productId;
+    });
+    addOrder(user.uId, productIds, totalPrice);
+    Swal.fire({
+      title: `Ordered successfully`,
+      confirmButtonText: "ok",
+      icon: "success",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+        navigate(0);
+      }
+    });
   };
 
   return isLoading ? (
@@ -46,11 +59,11 @@ const Order = () => {
   ) : (
     <div className={styles.orderPage}>
       <h1 className={styles.title}>Order Page</h1>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <div className={styles.form}>
         {order.map((product) => (
           <div key={product.name}>
             <div className={styles.productContainer}>
-              <img className={styles.image} src={product.image}></img>
+              <img alt="" className={styles.image} src={product.image}></img>
               <div className={styles.detailsContainer}>
                 <span>{product.name}</span>
                 <span>Quantity: {product.quantity}</span>
@@ -60,10 +73,10 @@ const Order = () => {
           </div>
         ))}
         <h2>Total Price: {totalPrice}$</h2>
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" className={styles.submitButton} onClick={handleSubmit}>
           Submit Order
         </button>
-      </form>
+      </div>
     </div>
   );
 };

@@ -24,8 +24,19 @@
     border-bottom: 1px solid grey;
 }
 
+.priceContainer > span {
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
+}
+
+.priceContainer > span:last-of-type > span:first-of-type {
+    font-size: 20px;
+}
+
 .priceContainer {
-    background-color: lightgrey;
+    border: 1px solid grey;
+    background-color: white;
     padding: 1.5rem 2rem;
     text-align: right;
     display: flex;
@@ -33,12 +44,28 @@
     justify-content: space-between;
 }
 
-.priceContainer > .resetBtn {
-    text-transform: capitalize;
-    font-size: 1.1rem;
-}
-
 .priceContainer .totalPrice {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
+
+.orderBtn {
+    color: black !important;
+    border: 2px solid black !important;
+}
+.btn {
+    text-transform: uppercase;
+    outline: none;
+    border: 2px solid red;
+    color: red;
+    padding: 0.5rem 1rem;
+    border-radius: 5%;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s ease-in-out;
+    font-size: 1.5rem;
+  }

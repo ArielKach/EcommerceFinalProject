@@ -12,13 +12,14 @@
 }
 
 .imageWrapper {
-  max-height: 8rem;
-  min-width: 6.25rem;
+  height: 8rem;
+  width: 6.25rem;
   box-sizing: border-box;
 }
 
 .image {
   height: 100%;
+  width: 100%;
 }
 
 .info {
@@ -52,6 +53,7 @@
 .price {
   font-weight: bold;
   font-size: 1.4rem;
+  padding-top: 8px;
 }
 
 .quantity {

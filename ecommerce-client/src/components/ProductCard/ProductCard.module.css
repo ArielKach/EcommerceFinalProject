@@ -4,7 +4,7 @@
   flex-direction: column;
   transition: box-shadow 0.2s ease-in-out;
   padding-block: 2rem;
-  padding-inline: 3rem;
+  padding-inline: 0.5rem;
 }
 
 .container:hover {
@@ -22,7 +22,8 @@
 }
 
 .productImage > img {
-  width: 100%;
+  width: 200px;
+  height: 200px;
   transition: transform 0.2s ease-in-out;
 }
 

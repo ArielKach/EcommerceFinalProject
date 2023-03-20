@@ -5,6 +5,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import placeholderImage from '../../assets/images/placeholder.png';
 import { addToCart, getProductData } from '../../utils/api';
 import { UserContext } from '../../context/UserContext';
+import { NotificationManager } from 'react-notifications';
 
 const Product = () => {
 	const { productId } = useParams();
@@ -21,6 +22,7 @@ const Product = () => {
 	}, [productId]);
 
 	const handleAdd = () => {
+		NotificationManager.success(`Successfully added ${productInfo?.name}`, 'Added product!', 500);
 		addToCart(user.uId, productInfo);
 	};
 

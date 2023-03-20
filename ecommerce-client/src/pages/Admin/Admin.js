@@ -10,13 +10,14 @@ const Admin = ({ currentUsersCount }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const response = await getOrdersSumByDates();
+			console.log(response.data)
 			setRawData(response.data.map((res) => ({ date: new Date(res.date), sum: res.sum })));
 			setIsLoading(false);
 		}
 		setIsLoading(true);
 		fetchData();
 	}, []);
-
+	console.log(rawData)
 	const filledData = (data) => {
 		const yearsInData = data
 			.reduce((years, chartData) => {
@@ -41,6 +42,12 @@ const Admin = ({ currentUsersCount }) => {
 			chartData.date.setHours(5);
 			allDates.delete(chartData.date.getTime());
 		});
+
+		console.log(data.concat(
+			...[...allDates].map((date) => {
+				return { date: new Date(date), sum: 0 };
+			})
+		))
 
 		return data.concat(
 			...[...allDates].map((date) => {
