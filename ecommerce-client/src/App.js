@@ -70,7 +70,7 @@ const App = () => {
                 element={<Register updateUser={updateUser} />}
               />
 
-              {user.isAdmin && <Route
+              {user?.isAdmin && <Route
                 path="/admin"
                 element={<Admin currentUsersCount={connectedUsers} />}
               />}
